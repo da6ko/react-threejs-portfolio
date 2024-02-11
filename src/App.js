@@ -1,12 +1,12 @@
-
 import React from 'react';
-import Three from './components/threePortfolio.js'
+import Technologies from './components/Technologies';
 
-
-function App() {
+const App = () => {
   return (
-    <Three />
+    <div>
+      <Technologies />
+    </div>
   );
-}
+};
 
 export default App;
