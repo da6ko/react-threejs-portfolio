@@ -70,9 +70,12 @@ const SpinningCube = ({ textureImages }) => {
       return raycaster.intersectObjects(scene.children, true);
     };
 
-    canvasRef.current.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mouseup', onMouseUp);
-    window.addEventListener('mousemove', onMouseMove);
+    // Add event listeners conditionally if canvasRef.current is not null
+    if (canvasRef.current) {
+      canvasRef.current.addEventListener('mousedown', onMouseDown);
+      window.addEventListener('mouseup', onMouseUp);
+      window.addEventListener('mousemove', onMouseMove);
+    }
 
     const animate = () => {
       requestAnimationFrame(animate);
@@ -85,8 +88,12 @@ const SpinningCube = ({ textureImages }) => {
 
     animate();
 
+    // Cleanup function
     return () => {
-      canvasRef.current.removeEventListener('mousedown', onMouseDown);
+      // Remove event listeners only if canvasRef.current is not null
+      if (canvasRef.current) {
+        canvasRef.current.removeEventListener('mousedown', onMouseDown);
+      }
       window.removeEventListener('mouseup', onMouseUp);
       window.removeEventListener('mousemove', onMouseMove);
       cancelAnimationFrame(animate);
